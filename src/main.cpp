@@ -28,8 +28,8 @@ int main()
 /* SPACESHIPS	*/
 
 	//Loading the SPACESHIPS nodes
-	osg::ref_ptr<osg::Node> xWing (osgDB::readNodeFile("C:\\Users\\eleve\\Documents\\Visual Studio 2012\\Projects\\TPosgAvions\\TPosgAvions\\model\\StarWars\\star wars x-wing.3ds"));
-	osg::ref_ptr<osg::Node> tFighter (osgDB::readNodeFile("C:\\Users\\eleve\\Documents\\Visual Studio 2012\\Projects\\TPosgAvions\\TPosgAvions\\model\\mechant\\TF_3DS02.3ds"));
+	osg::ref_ptr<osg::Node> xWing (osgDB::readNodeFile("Z:\\KANG_Yabin\\MEDEV\\TP-avions\\resource\\x-wing.3ds"));
+	osg::ref_ptr<osg::Node> tFighter (osgDB::readNodeFile("Z:\\KANG_Yabin\\MEDEV\\TP-avions\\resource\\blackbird.3DS"));
 
 /* Scale Matrix	*/
 
@@ -42,7 +42,7 @@ int main()
 	matrixXWing.makeScale(osg::Vec3f(0.06,0.06,0.06));
 
 	osg::Matrix matrixTFighter;
-	matrixTFighter.makeScale(osg::Vec3f(0.005,0.005,0.005));
+	matrixTFighter.makeScale(osg::Vec3f(0.001,0.001,0.001));
 
 	//Set transformation node parameters
 	matXWing->addChild(xWing.get());
@@ -79,6 +79,18 @@ int main()
 	osg::ref_ptr<osg::PositionAttitudeTransform> pat4 (new osg::PositionAttitudeTransform);
 	pat4->addChild(patTFigther.get());
 
+/* TERRAIN */
+	// Create transformation node
+	osg::ref_ptr<osg::MatrixTransform> terrainScaleMAT (new osg::MatrixTransform);
+	// Scale matrix
+	osg::Matrix terrainScaleMatrix;
+	terrainScaleMatrix.makeScale(0.05f,0.05f,0.05f);
+	//Loading the terrain node
+	osg::ref_ptr<osg::Node> terrainnode (osgDB::readNodeFile("Z:\\KANG_Yabin\\MEDEV\\TP-avions\\resource\\Terrain2.3ds"));
+	//Set transformation node parameters
+	terrainScaleMAT->addChild(terrainnode);
+	terrainScaleMAT->setMatrix(terrainScaleMatrix);
+
 
 /* SCENE GRAPH*/
 
@@ -87,6 +99,7 @@ int main()
 	root->addChild(pat2.get());
 	root->addChild(pat3.get());
 	root->addChild(pat4.get());
+	root->addChild(terrainScaleMAT.get());
 
 	// Set the scene data
 	viewer.setSceneData( root.get() ); 

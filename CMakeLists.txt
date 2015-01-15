@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 PROJECT ( tp_avions )
 
-FIND_PACKAGE( OpenSceneGraph REQUIRED osgDB osgViewer osgGA)
+FIND_PACKAGE( OpenSceneGraph REQUIRED osg osgDB osgViewer osgGA)
 
 set(EXECUTABLE_OUTPUT_PATH bin)
 
